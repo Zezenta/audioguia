@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audioguía</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+            height: auto;
+            transition: width 0.3s; /* Agregamos una transición suave para el cambio de altura */
+        }
+
+        .contenido {
+            width: 100%;
+            padding: 0%;
+            margin: 0 auto;
+        }
+
+
+        .main-header {
+            position: sticky; /* Hacemos que el encabezado sea pegajoso */
+            top: 0; /* Lo fijamos en la parte superior */
+            background-color: #ffffff; /* Cambia el color de fondo según tus preferencias */
+            z-index: 1000; /* Asegura que esté por encima de otros elementos */
+        }
+
+        .main-header.sticky .logo {
+            width: 20%; /* Altura reducida cuando el encabezado está pegado */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header" class="main-header">
+        <img src="header.png" alt="header" class="logo" id="logo"></img>
+    </header>
+    <img src="contenido.png" alt="contenido" class="contenido"></img>
+    <audio id="1">
+        <source src="beep.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="2">
+        <source src="Flashing_Lights.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        // JavaScript para hacer el encabezado pegajoso (sticky)
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY) {
+                header.classList.add('sticky');
+            } else {
+                header.classList.remove('sticky');
+            }
+        });
+        // Obtener el elemento de audio
+        var audio1 = document.getElementById("1");
+        var audio2 = document.getElementById("2")
+
+        // Escuchar eventos de teclado en todo el documento
+        document.addEventListener("keydown", function(event) {
+            switch(event.key){
+                case "1":
+                    audio1.play();
+                break;
+                case "2":
+                    audio2.play();
+                break;
+                default:
+                    audio1.pause();
+                    audio2.pause();
+                break;
+            }
+        });
+
+    </script>
+</body>
+</html>
