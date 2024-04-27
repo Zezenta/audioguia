@@ -44,10 +44,10 @@
     </header>
     <img src="contenido.png" alt="contenido" class="contenido"></img>
     <audio id="1">
-        <source src="beep.mp3" type="audio/mpeg">
+        <source src="1.mp3" type="audio/mpeg">
     </audio>
     <audio id="2">
-        <source src="Flashing_Lights.mp3" type="audio/mpeg">
+        <source src="2.mp3" type="audio/mpeg">
     </audio>
     <script>
         // JavaScript para hacer el encabezado pegajoso (sticky)
@@ -78,7 +78,10 @@
                 break;
             }
         });
-
+        setTimeout(function() {
+            // Alert after 200 milliseconds
+            alert("Presiona 1 para escuchar las instrucciones.")
+        }, 200);
     </script>
 </body>
 </html>
