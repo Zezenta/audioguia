@@ -49,6 +49,31 @@
     <audio id="2">
         <source src="2.mp3" type="audio/mpeg">
     </audio>
+    <audio id="3">
+        <source src="3.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="4">
+        <source src="4.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="5">
+        <source src="5.m4a" type="audio/mpeg">
+    </audio>
+    <audio id="6">
+        <source src="6.m4a" type="audio/mpeg">
+    </audio>
+    <audio id="7">
+        <source src="7.m4a" type="audio/mpeg">
+    </audio>
+    <audio id="8">
+        <source src="8.m4a" type="audio/mpeg">
+    </audio>
+    <audio id="9">
+        <source src="9.m4a" type="audio/mpeg">
+    </audio>
+    <audio id="q">
+        <source src="q.m4a" type="audio/mpeg">
+    </audio>
+
     <script>
         // JavaScript para hacer el encabezado pegajoso (sticky)
         window.addEventListener('scroll', function() {
@@ -61,26 +86,156 @@
         });
         // Obtener el elemento de audio
         var audio1 = document.getElementById("1");
-        var audio2 = document.getElementById("2")
+        var audio2 = document.getElementById("2");
+        var audio3 = document.getElementById("3");
+        var audio4 = document.getElementById("4");
+        var audio5 = document.getElementById("5");
+        var audio6 = document.getElementById("6");
+        var audio7 = document.getElementById("7");
+        var audio8 = document.getElementById("8");
+        var audio9 = document.getElementById("9");
+        var audioq = document.getElementById("q");
 
         // Escuchar eventos de teclado en todo el documento
         document.addEventListener("keydown", function(event) {
             switch(event.key){
                 case "1":
                     audio1.play();
+                    audio2.pause();
+                    audio3.pause();
+                    audio4.pause();
+                    audio5.pause();
+                    audio6.pause();
+                    audio7.pause();
+                    audio8.pause();
+                    audio9.pause();
+                    audioq.pause();
                 break;
                 case "2":
                     audio2.play();
+                    audio1.pause();
+                    audio3.pause();
+                    audio4.pause();
+                    audio5.pause();
+                    audio6.pause();
+                    audio7.pause();
+                    audio8.pause();
+                    audio9.pause();
+                    audioq.pause();
+                break;
+                case "3":
+                    audio3.play();
+                    audio1.pause();
+                    audio2.pause();
+                    audio4.pause();
+                    audio5.pause();
+                    audio6.pause();
+                    audio7.pause();
+                    audio8.pause();
+                    audio9.pause();
+                    audioq.pause();
+                break;
+                case "4":
+                    audio4.play();
+                    audio1.pause();
+                    audio2.pause();
+                    audio3.pause();
+                    audio5.pause();
+                    audio6.pause();
+                    audio7.pause();
+                    audio8.pause();
+                    audio9.pause();
+                    audioq.pause();
+                break;
+                case "5":
+                    audio5.play();
+                    audio1.pause();
+                    audio2.pause();
+                    audio3.pause();
+                    audio4.pause();
+                    audio6.pause();
+                    audio7.pause();
+                    audio8.pause();
+                    audio9.pause();
+                    audioq.pause();
+                break;
+                case "6":
+                    audio6.play();
+                    audio1.pause();
+                    audio2.pause();
+                    audio3.pause();
+                    audio4.pause();
+                    audio5.pause();
+                    audio7.pause();
+                    audio8.pause();
+                    audio9.pause();
+                    audioq.pause();
+                break;
+                case "7":
+                    audio7.play();
+                    audio1.pause();
+                    audio2.pause();
+                    audio3.pause();
+                    audio4.pause();
+                    audio5.pause();
+                    audio6.pause();
+                    audio8.pause();
+                    audio9.pause();
+                    audioq.pause();
+                break;
+                case "8":
+                    audio8.play();
+                    audio1.pause();
+                    audio2.pause();
+                    audio3.pause();
+                    audio4.pause();
+                    audio5.pause();
+                    audio6.pause();
+                    audio7.pause();
+                    audio9.pause();
+                    audioq.pause();
+                break;
+                case "9":
+                    audio9.play();
+                    audio1.pause();
+                    audio2.pause();
+                    audio3.pause();
+                    audio4.pause();
+                    audio5.pause();
+                    audio6.pause();
+                    audio7.pause();
+                    audio8.pause();
+                    audioq.pause();
+                break;
+                case "q":
+                    audioq.play();
+                    audio1.pause();
+                    audio2.pause();
+                    audio3.pause();
+                    audio4.pause();
+                    audio5.pause();
+                    audio6.pause();
+                    audio7.pause();
+                    audio8.pause();
+                    audio9.pause();
                 break;
                 default:
                     audio1.pause();
                     audio2.pause();
+                    audio3.pause();
+                    audio4.pause();
+                    audio5.pause();
+                    audio6.pause();
+                    audio7.pause();
+                    audio8.pause();
+                    audio9.pause();
+                    audioq.pause();
                 break;
             }
         });
         setTimeout(function() {
             // Alert after 200 milliseconds
-            alert("Presiona 1 para escuchar las instrucciones.")
+            alert("Presiona 1 para escuchar las instrucciones. Para reproducir el audio 10, presiona la letra q.")
         }, 200);
     </script>
 </body>
