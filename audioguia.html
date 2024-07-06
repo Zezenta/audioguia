@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audioguía</title>
     <style>
+        @font-face {
+            font-family: 'KG Primary Penmanship';
+            src: url('KGPrimaryPenmanship.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -36,13 +43,120 @@
             width: 20%; /* Altura reducida cuando el encabezado está pegado */
             height: auto;
         }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .botones {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+        }
+ 
+        @media (min-width: 1900px) {
+            .botones {
+                position: absolute;
+                top: 40%;
+                right: 0%;
+                gap: 10px; /* Optional: Add space between buttons */
+            }
+            .map-button {
+                padding: 10px 20px;
+                cursor: pointer;
+                border: 0px;
+                font-family: "KG Primary Penmanship";
+                font-size: 30px;
+                /* Optional styling */
+            }
+        }
+        @media (max-width: 1800px) {
+            .botones {
+                position: absolute;
+                top: 40%;
+                right: 0%;
+                width: 225px;
+                gap: 5px; /* Optional: Add space between buttons */
+            }
+            .map-button {
+                padding: 10px 20px;
+                cursor: pointer;
+                border: 0px;
+                font-family: "KG Primary Penmanship";
+                font-size: 20px;
+                /* Optional styling */
+            }
+        }
+
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <header id="main-header" class="main-header">
         <img src="header.png" alt="header" class="logo" id="logo"></img>
     </header>
-    <img src="contenido.png" alt="contenido" class="contenido"></img>
+    <div class="map-container">
+        <img src="contenido2.png" alt="Geología del Ecuador" class="contenido">
+        <!-- Example buttons positioned inside the rectangle to the right -->
+        <div class="botones">
+            <h1 style="color: white; font-family: 'KG Primary Penmanship'; text-align: center; font-size: 60px;">Menú</h1>
+            <button class="map-button boton1" style="background-color: #5271ff;" onclick="playaudio('1')">1. Introducción</button>
+            <button class="map-button boton2" style="background-color: #f16728;" onclick="playaudio('2')">2. Geodinámica</button>
+            <button class="map-button boton3" style="background-color: #058b06;" onclick="playaudio('3')">3. Cuenca Oriente</button>
+            <button class="map-button boton4" style="background-color: #ff3131;" onclick="playaudio('4')">4. Cordillera Real</button>
+            <button class="map-button boton5" style="background-color: #5ce1e6;" onclick="playaudio('5')">5. Bloque Amotape-Tahuín</button>
+            <button class="map-button boton6" style="background-color: #ffbd59;" onclick="playaudio('6')">6. Cuenca Lancones Alamar</button>
+            <button class="map-button boton7" style="background-color: #c1ff72;" onclick="playaudio('7')">7. Cordillera Occidental</button>
+            <button class="map-button boton8" style="background-color: #cb6ce6;" onclick="playaudio('8')">8. Cuencas de antearco</button>
+            <button class="map-button boton9" style="background-color: #b87209;" onclick="playaudio('9')">9. Cuencas intramontanas</button>
+            <button class="map-button botond" style="background-color: #9ac0ed;" onclick="playaudio('d')">10. Callejon Interandino y<br>Arco Cuaternario</button>
+            <button id="botono" class="map-button botono" style="background-color: #e43099;" onclick="playaudio('o')">11. Evolución Geológica<br>del Ecuador</button>
+        </div>
+        
+        <!-- Add more buttons as needed with appropriate positioning -->
+    </div>
+    <div id="popup" class="popup">
+        <span id="closePopup" class="close">&times;</span>
+        <img src="dibujo.jpg" alt="Popup Image" class="popup-content">
+    </div>
     <audio id="1">
         <source src="1.mp3" type="audio/mpeg">
     </audio>
@@ -70,11 +184,15 @@
     <audio id="9">
         <source src="9.m4a" type="audio/mpeg">
     </audio>
-    <audio id="q">
-        <source src="q.m4a" type="audio/mpeg">
+    <audio id="d">
+        <source src="d.m4a" type="audio/mpeg">
+    </audio>
+    <audio id="o">
+        <source src="o.m4a" type="audio/mpeg">
     </audio>
 
     <script>
+        var popup = document.getElementById('popup');
         // JavaScript para hacer el encabezado pegajoso (sticky)
         window.addEventListener('scroll', function() {
             const header = document.getElementById('main-header');
@@ -95,7 +213,8 @@
             "7": document.getElementById("7"),
             "8": document.getElementById("8"),
             "9": document.getElementById("9"),
-            "q": document.getElementById("q")
+            "d": document.getElementById("d"),
+            "o": document.getElementById("o")
         };
 
         const keys = Object.keys(dynamicVars);
@@ -107,6 +226,7 @@
             if(keypressed != "p"){
                 for(i = 0; i < Object.keys(dynamicVars).length; i++){
                     if(keypressed != dynamicVars[keys[i]]){
+                        console.log(dynamicVars[keys[i]]);
                         dynamicVars[keys[i]].pause();
                     }
                 }
@@ -121,11 +241,34 @@
                 }
             }
         }
+        var botonimagen = document.getElementById("botono");
+        botonimagen.addEventListener('click', function(){
+            popup.style.display = 'flex';
+        });
         // Escuchar eventos de teclado en todo el documento
         setTimeout(function() {
             // Alert after 200 milliseconds
             alert("Presiona 1 para escuchar las instrucciones. Para reproducir el audio 10, presiona la letra q.")
         }, 200);
+        // Get the modal
+
+// Get the button that opens the modal
+// Get the <span> element that closes the modal
+var span = document.getElementById('closePopup');
+
+// When the user clicks the button, open the modal 
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    popup.style.display = 'none';
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = 'none';
+    }
+}
     </script>
 </body>
 </html>
