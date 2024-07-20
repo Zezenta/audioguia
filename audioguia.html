@@ -149,6 +149,7 @@
             <button class="map-button boton9" style="background-color: #b87209;" onclick="playaudio('9')">9. Cuencas intramontanas</button>
             <button class="map-button botond" style="background-color: #9ac0ed;" onclick="playaudio('d')">10. Callejon Interandino y<br>Arco Cuaternario</button>
             <button id="botono" class="map-button botono" style="background-color: #e43099;" onclick="playaudio('o')">11. Evolución Geológica<br>del Ecuador</button>
+            <button id="botonz" class="map-button botonz" style="background-color: #0077ff;" onclick="playaudio('z')">12. Tectónica de los<br>Andes ecuatorianos</button>
         </div>
         
         <!-- Add more buttons as needed with appropriate positioning -->
@@ -156,6 +157,10 @@
     <div id="popup" class="popup">
         <span id="closePopup" class="close">&times;</span>
         <img src="dibujo.jpg" alt="Popup Image" class="popup-content">
+    </div>
+    <div id="popup2" class="popup">
+        <span id="closePopup2" class="close">&times;</span>
+        <img src="dibujo2.jpg" alt="Popup Image" class="popup-content">
     </div>
     <audio id="1">
         <source src="1.mp3" type="audio/mpeg">
@@ -190,9 +195,13 @@
     <audio id="o">
         <source src="o.m4a" type="audio/mpeg">
     </audio>
+    <audio id="z">
+        <source src="z.m4a" type="audio/mpeg">
+    </audio>
 
     <script>
         var popup = document.getElementById('popup');
+        var popup2 = document.getElementById('popup2');
         // JavaScript para hacer el encabezado pegajoso (sticky)
         window.addEventListener('scroll', function() {
             const header = document.getElementById('main-header');
@@ -214,7 +223,8 @@
             "8": document.getElementById("8"),
             "9": document.getElementById("9"),
             "d": document.getElementById("d"),
-            "o": document.getElementById("o")
+            "o": document.getElementById("o"),
+            "z": document.getElementById("z")
         };
 
         const keys = Object.keys(dynamicVars);
@@ -242,8 +252,12 @@
             }
         }
         var botonimagen = document.getElementById("botono");
+        var botonimagen2 = document.getElementById("botonz");
         botonimagen.addEventListener('click', function(){
             popup.style.display = 'flex';
+        });
+        botonimagen2.addEventListener('click', function(){
+            popup2.style.display = 'flex';
         });
         // Escuchar eventos de teclado en todo el documento
         setTimeout(function() {
@@ -255,6 +269,7 @@
 // Get the button that opens the modal
 // Get the <span> element that closes the modal
 var span = document.getElementById('closePopup');
+var span2 = document.getElementById('closePopup2');
 
 // When the user clicks the button, open the modal 
 
@@ -262,11 +277,15 @@ var span = document.getElementById('closePopup');
 span.onclick = function() {
     popup.style.display = 'none';
 }
+span2.onclick = function() {
+    popup.style.display = 'none';
+}
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == popup) {
+    if (event.target == popup || event.target == popup2) {
         popup.style.display = 'none';
+        popup2.style.display = 'none';
     }
 }
     </script>
