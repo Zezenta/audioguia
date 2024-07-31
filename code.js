@@ -10,108 +10,46 @@ window.addEventListener('scroll', function() {
     }
 });
 
-//Tratamos de obtener todos los elementos de audio
-const audios = document.querySelectorAll('.classAudio');
-// console.log(audios);
+//we get all the audio objects and we turn them from a node list into an array
+const audios = Array.from(document.querySelectorAll('.classAudio')); 
+let currentplayed = null;   //use to save the audio currently playing
+let playing = false;    //To identify if some audio is playing at the moment
 
+//To active the play audio function only when we press a key
+document.addEventListener("keydown", (event) => {
+    playaudio(event.key);
+});
 
-// document.addEventListener("keydown", (event) => {
-//     let key = event.key;
-//     playaudio(key)            
-// })
-
-
-function playaudio() {    
-    let currentplayed;      //will save the audio that is playing at the moment, and we manipulate it later
-    
-    //we iterate all the HTMLElementObjects
-    audios.forEach(audio => {
-        document.addEventListener("keydown", (event) => {
-            //Verificate if the key we press match with the audios we have
-            if (event.key == audio.id) {
-                if (playing) {
-                    currentplayed.pause()
-                    currentplayed.currentTime = 0;
-                    audio.play();
-                    currentplayed = audio;
-                } else {    //It executes in case there's an audio playing at the moment
-                    playing = true; 
-                    currentplayed = audio;  
-                    audio.play();  
-                }
-            } else{
-                pauseAudio(audio, paused)
-            }
-        })        
-    })
-}
-
-playaudio()
-let playing = false;    //see if an audio is playing
-let paused = false;     //To verify if the audio is paused
-
-const pauseAudio = (audio, paused) => {
-    if (paused) {
-        playing = true
-        paused = false;
-        audio.play();
-    }else {
-        playing = false
-        paused = true;
-        audio.pause();
+//Use it to pause or resume the audio currently playing
+const pauseAudio = () => {
+    if (playing) {
+        currentplayed.pause();
+        playing = false;
+    } else{
+        currentplayed.play();
+        playing = true;
     }
 }
 
+//Play the audio main function
+function playaudio(id) {
+    //we find the audio case that match we the parameter of the function
+    let audio = audios.find(a => a.id === id);  
 
-
-
-//Obtener el elemento de audio
-// const dynamicVars = {
-//     "1": document.getElementById("1"),
-//     "2": document.getElementById("2"),
-//     "3": document.getElementById("3"),
-//     "4": document.getElementById("4"),
-//     "5": document.getElementById("5"),
-//     "6": document.getElementById("6"),
-//     "7": document.getElementById("7"),
-//     "8": document.getElementById("8"),
-//     "9": document.getElementById("9"),
-//     "d": document.getElementById("d"),
-//     "o": document.getElementById("o"),
-//     "z": document.getElementById("z")
-// };
-
-// const keys = Object.keys(dynamicVars);
-// console.log(keys);
-
-// document.addEventListener("keydown", function(event){
-//     playaudio(event.key)            
-// })
-
-// function playaudio(keypressed){
-//     if(keypressed != "p"){
-//         // console.log(Object.keys(dynamicVars).length);
-//         for(i = 0; i < Object.keys(dynamicVars).length; i++){
-//             if(keypressed != dynamicVars[keys[i]]){
-//                 //dynamicVars[keys[i]] son todas las teclas que hay
-//                 // console.log(dynamicVars[keys[i]]);
-//                 dynamicVars[keys[i]].pause();
-//             }
-//         }
-//         //si la tecla no es una de las de dynamic vars, sale undefined
-//         console.log(dynamicVars[keypressed]);
-//         try{
-//             dynamicVars[keypressed].play();
-//         }
-//         catch{}
-//     }else{
-//         console.log('here');
-//         for(i = 0; i < Object.keys(dynamicVars).length; i++){
-//             dynamicVars[keys[i]].play();
-//             // console.log(dynamicVars[keys[i]]);
-//         }
-//     }
-// }
+    //In case it matches, it will reproduce the audio, otherwise it will pause or resume
+    if(audio) {
+        //use it to identify if there's any audio playing, in that case, we stop it, set its time in 0, and play the new one
+        if (playing) {
+            currentplayed.pause();
+            currentplayed.currentTime = 0;
+        }
+        audio.play();
+        currentplayed = audio;
+        playing = true;
+    } else {
+        pauseAudio();
+    }
+}
 
 //Imagenes que saltan en caso de apretar dichos botones
 const botonimagen = document.getElementById("botono");
