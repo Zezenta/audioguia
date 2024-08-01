@@ -55,23 +55,6 @@ body {
         position: absolute;
         top: 40%;
         right: 0%;
-        width: 225px;
-        gap: 5px; /* Optional: Add space between buttons */
-        background-color: #bbb;
-    }
-    .map-button {
-        padding: 10px 20px;
-        cursor: pointer;
-        border: 0px;
-        font-family: "KG Primary Penmanship";
-        font-size: 20px;
-        /* Optional styling */
-    }
-
-    /* .botones {
-        position: absolute;
-        top: 40%;
-        right: 0%;
         gap: 10px;
     }
     .map-button {
@@ -79,8 +62,9 @@ body {
         cursor: pointer;
         border: 0px;
         font-family: "KG Primary Penmanship";
-        font-size: 32px;
-    } */
+        font-size: 28.5px;
+        border-radius: 4px;
+    }
 }
 @media (max-width: 1750px) {
     .botones {
@@ -88,7 +72,7 @@ body {
         top: 40%;
         right: 0%;
         width: 225px;
-        gap: 5px; /* Optional: Add space between buttons */
+        gap: 5px; 
     }
     .map-button {
         padding: 10px 20px;
@@ -96,42 +80,30 @@ body {
         border: 0px;
         font-family: "KG Primary Penmanship";
         font-size: 20px;
-        /* Optional styling */
+        border-radius: 4px;
     }
 } 
 
-@media (max-width: 1920px) {
-    .botones {
-        position: absolute;
-        top: 40%;
-        right: 0%;
-        width: 225px;
-        gap: 5px; /* Optional: Add space between buttons */
-        background-color: #bbb;
-    }
-    .map-button {
-        padding: 10px 20px;
-        cursor: pointer;
-        border: 0px;
-        font-family: "KG Primary Penmanship";
-        font-size: 20px;
-        /* Optional styling */
-    }
 
-    /* .botones {
-        position: absolute;
-        top: 40%;
-        right: 0%;
-        gap: 10px;
-    }
-    .map-button {
-        padding: 10px 20px;
-        cursor: pointer;
-        border: 0px;
-        font-family: "KG Primary Penmanship";
-        font-size: 32px;
-    } */
+
+
+
+#relleno {
+    height: 60px;
 }
+
+#manejo-audio {
+    height: 10vh;
+    max-height: 70px;
+    width: 100%;
+    background-color: rgba(127, 255, 212, 0.338);
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .popup {
     display: none; /* Hidden by default */
     position: fixed;

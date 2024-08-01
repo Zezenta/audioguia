@@ -14,6 +14,7 @@ window.addEventListener('scroll', function() {
 const audios = Array.from(document.querySelectorAll('.classAudio')); 
 let currentplayed = null;   //use to save the audio currently playing
 let playing = false;    //To identify if some audio is playing at the moment
+let paused = false;
 
 //To active the play audio function only when we press a key
 document.addEventListener("keydown", (event) => {
@@ -23,11 +24,13 @@ document.addEventListener("keydown", (event) => {
 //Use it to pause or resume the audio currently playing
 const pauseAudio = () => {
     if (playing) {
-        currentplayed.pause();
+        paused = true;
         playing = false;
+        currentplayed.pause();
     } else{
-        currentplayed.play();
+        paused = false;
         playing = true;
+        currentplayed.play();
     }
 }
 
@@ -37,15 +40,27 @@ function playaudio(id) {
     let audio = audios.find(a => a.id === id);  
 
     //In case it matches, it will reproduce the audio, otherwise it will pause or resume
-    if(audio) {
+    if(audio){ 
         //use it to identify if there's any audio playing, in that case, we stop it, set its time in 0, and play the new one
         if (playing) {
             currentplayed.pause();
             currentplayed.currentTime = 0;
+            
+            currentplayed.removeAttribute('controls');
+            audio.setAttribute('controls', '');
+        } else{
+            if (paused) {
+                currentplayed.currentTime = 0;
+                currentplayedremoveAttribute('controls');
+                paused = false;
+            }
+            audio.setAttribute('controls', '');
         }
+
         audio.play();
         currentplayed = audio;
         playing = true;
+
     } else {
         pauseAudio();
     }
