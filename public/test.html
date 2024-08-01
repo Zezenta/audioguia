@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenAI Chat</title>
+</head>
+<body>
+    <h1>OpenAI Chat</h1>
+    <input type="text" id="question" placeholder="Enter your question here">
+    <button onclick="askQuestion()">Ask</button>
+    <div id="answer"></div>
+
+    <script>
+        async function askQuestion() {
+            const question = document.getElementById("question").value;
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question: question }),
+            });
+            const data = await response.json();
+            document.getElementById("answer").innerHTML = data.choices[0].message.content;
+        }
+    </script>
+</body>
+</html>

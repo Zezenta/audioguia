@@ -1,1 +1,3 @@
 *.rar
+.env
+node_modules

@@ -65,6 +65,9 @@ body {
         /* Optional styling */
     }
 }
+
+
+
 @media (max-width: 1800px) {
     .botones {
         position: absolute;
