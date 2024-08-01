@@ -32,8 +32,9 @@ body {
     z-index: 1000; /* Asegura que esté por encima de otros elementos */
 }
 
+/* Altura reducida cuando el encabezado está pegado */
 .main-header.sticky .logo {
-    width: 20%; /* Altura reducida cuando el encabezado está pegado */
+    width: 20%; 
     height: auto;
 }
 
@@ -49,23 +50,39 @@ body {
     position: absolute;
 }
 
-@media (min-width: 1900px) {
+@media (min-width: 1920px) {
     .botones {
         position: absolute;
         top: 40%;
         right: 0%;
-        gap: 10px; /* Optional: Add space between buttons */
+        width: 225px;
+        gap: 5px; /* Optional: Add space between buttons */
+        background-color: #bbb;
     }
     .map-button {
         padding: 10px 20px;
         cursor: pointer;
         border: 0px;
         font-family: "KG Primary Penmanship";
-        font-size: 30px;
+        font-size: 20px;
         /* Optional styling */
     }
+
+    /* .botones {
+        position: absolute;
+        top: 40%;
+        right: 0%;
+        gap: 10px;
+    }
+    .map-button {
+        padding: 10px 20px;
+        cursor: pointer;
+        border: 0px;
+        font-family: "KG Primary Penmanship";
+        font-size: 32px;
+    } */
 }
-@media (max-width: 1800px) {
+@media (max-width: 1750px) {
     .botones {
         position: absolute;
         top: 40%;
@@ -81,8 +98,40 @@ body {
         font-size: 20px;
         /* Optional styling */
     }
-}
+} 
 
+@media (max-width: 1920px) {
+    .botones {
+        position: absolute;
+        top: 40%;
+        right: 0%;
+        width: 225px;
+        gap: 5px; /* Optional: Add space between buttons */
+        background-color: #bbb;
+    }
+    .map-button {
+        padding: 10px 20px;
+        cursor: pointer;
+        border: 0px;
+        font-family: "KG Primary Penmanship";
+        font-size: 20px;
+        /* Optional styling */
+    }
+
+    /* .botones {
+        position: absolute;
+        top: 40%;
+        right: 0%;
+        gap: 10px;
+    }
+    .map-button {
+        padding: 10px 20px;
+        cursor: pointer;
+        border: 0px;
+        font-family: "KG Primary Penmanship";
+        font-size: 32px;
+    } */
+}
 .popup {
     display: none; /* Hidden by default */
     position: fixed;
