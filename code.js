@@ -33,7 +33,7 @@ const pauseAudio = () => {
 
 //Play the audio main function
 function playaudio(id) {
-    //we find the audio case that match we the parameter of the function
+    //we find the audio case that matches with the parameter of the function
     let audio = audios.find(a => a.id === id);  
 
     //In case it matches, it will reproduce the audio, otherwise it will pause or resume
