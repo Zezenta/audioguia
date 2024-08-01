@@ -57,6 +57,7 @@ function playaudio(id) {
             audio.setAttribute('controls', '');
         }
 
+        console.log('playing');
         audio.play();
         currentplayed = audio;
         playing = true;
