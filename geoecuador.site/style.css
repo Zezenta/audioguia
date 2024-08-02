@@ -24,7 +24,6 @@ body {
     margin: 0 auto;
 }
 
-
 .main-header {
     position: sticky; /* Hacemos que el encabezado sea pegajoso */
     top: 0; /* Lo fijamos en la parte superior */

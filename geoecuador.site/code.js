@@ -73,8 +73,6 @@ const botonResume = document.getElementById('botonResume');
 
 //To active the play audio function only when we press a key
 document.addEventListener("keydown", (event) => {
-    mensajeAudioInicio.style.display = 'none';
-    elementosDeAudio.style.display = 'flex';
     playaudio(event.key);
 });
 
@@ -101,6 +99,10 @@ const pauseAudio = () => {
 
 //Play the audio main function
 function playaudio(id) {
+    //ponemos el display correcto cuando se reproduce y quitamos el mensaje
+    mensajeAudioInicio.style.display = 'none';
+    elementosDeAudio.style.display = 'flex';
+
     //we find the audio case that matches with the parameter of the function
     let audio = audios.find(a => a.id === id);  
 
