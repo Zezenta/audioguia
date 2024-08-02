@@ -10,24 +10,89 @@ window.addEventListener('scroll', function() {
     }
 });
 
+//obtenemos los div del contenedor de la barra y la barra
+const audioProgressContainer = document.getElementById('audio-progress-container');
+const audioProgressBar = document.getElementById('audio-progress-bar');
+let desliza = false;    //para definir si el usuario encuntra deslizando la barra
+
+// Actualiza la barra de progreso y la posición del audio
+const updateProgressBar = () => {
+    if (currentplayed) {
+        const progress = (currentplayed.currentTime / currentplayed.duration) * 100;
+        audioProgressBar.style.width = `${progress}%`;
+    }
+};
+
+// Cambia el tiempo del audio basado en la posición de la barra de progreso
+const setAudioTime = (event) => {
+    if (currentplayed) {
+        const rect = audioProgressContainer.getBoundingClientRect();    //obtenemos las propiedades de este div
+        const offsetX = event.clientX - rect.left;  //definimos la la posicion de donde esta el click en el div
+        const totalWidth = rect.width;  //definimos el total del tamaño de la barra
+        const percentage = offsetX / totalWidth;    //porcentaje en el que va la barra 
+        const newTime = percentage * currentplayed.duration;    //definimos la nueva duracion 
+        currentplayed.currentTime = newTime;  
+    }
+};
+
+// Manejar el clic en la barra de progreso para cambiar el tiempo del audio
+audioProgressContainer.addEventListener('click', setAudioTime);
+
+// Manejar el arrastre de la barra de progreso
+audioProgressContainer.addEventListener('mousedown', (event) => {
+    desliza = true;
+    setAudioTime(event);
+});
+//Se activa cuando el usuario mueve el mouse
+document.addEventListener('mousemove', (event) => {
+    if (desliza) {
+        setAudioTime(event);
+    }
+});
+//Se activa cuando el usuario suelta el click
+document.addEventListener('mouseup', () => {
+    desliza = false;
+});
+
+// Actualiza la barra de progreso cada 0.1 segundos para que se vea rapido la actualizacion de la barra
+setInterval(updateProgressBar, 100);
+
 //we get all the audio objects and we turn them from a node list into an array
 const audios = Array.from(document.querySelectorAll('.classAudio')); 
 let currentplayed = null;   //use to save the audio currently playing
 let playing = false;    //To identify if some audio is playing at the moment
 let paused = false;
 
+//variables para el cambio de display entre no haber audio, y existir un audio en reproduccion
+const mensajeAudioInicio = document.getElementById('mensaje-audio-inicio');
+const elementosDeAudio = document.getElementById('elementos-de-audio');
+//variables para el cambio de display de las imagenes de los botones de pausa y resume
+const botonPausa = document.getElementById('botonPausa');
+const botonResume = document.getElementById('botonResume');
+
+
 //To active the play audio function only when we press a key
 document.addEventListener("keydown", (event) => {
+    mensajeAudioInicio.style.display = 'none';
+    elementosDeAudio.style.display = 'flex';
     playaudio(event.key);
 });
+
 
 //Use it to pause or resume the audio currently playing
 const pauseAudio = () => {
     if (playing) {
+        botonPausa.style.display = 'none';
+        botonResume.style.display = 'flex';
+        
+        mensajeAudioInicio.style.display = 'none';
         paused = true;
         playing = false;
         currentplayed.pause();
     } else{
+        botonResume.style.display = 'none';
+        botonPausa.style.display = 'flex';
+
         paused = false;
         playing = true;
         currentplayed.play();
@@ -45,16 +110,6 @@ function playaudio(id) {
         if (playing) {
             currentplayed.pause();
             currentplayed.currentTime = 0;
-            
-            currentplayed.removeAttribute('controls');
-            audio.setAttribute('controls', '');
-        } else{
-            if (paused) {
-                currentplayed.currentTime = 0;
-                currentplayedremoveAttribute('controls');
-                paused = false;
-            }
-            audio.setAttribute('controls', '');
         }
 
         console.log('playing');
