@@ -10,108 +10,128 @@ window.addEventListener('scroll', function() {
     }
 });
 
-//Tratamos de obtener todos los elementos de audio
-const audios = document.querySelectorAll('.classAudio');
-// console.log(audios);
+//obtenemos los div del contenedor de la barra y la barra
+const audioProgressContainer = document.getElementById('audio-progress-container');
+const audioProgressBar = document.getElementById('audio-progress-bar');
+let desliza = false;    //para definir si el usuario encuntra deslizando la barra
 
+// Actualiza la barra de progreso y la posición del audio
+const updateProgressBar = () => {
+    if (currentplayed) {
+        const progress = (currentplayed.currentTime / currentplayed.duration) * 100;
+        audioProgressBar.style.width = `${progress}%`;
+    }
+};
 
-// document.addEventListener("keydown", (event) => {
-//     let key = event.key;
-//     playaudio(key)            
-// })
+// Cambia el tiempo del audio basado en la posición de la barra de progreso
+const setAudioTime = (event) => {
+    if (currentplayed) {
+        const rect = audioProgressContainer.getBoundingClientRect();    //obtenemos las propiedades de este div
+        const offsetX = event.clientX - rect.left;  //definimos la la posicion de donde esta el click en el div
+        const totalWidth = rect.width;  //definimos el total del tamaño de la barra
+        const percentage = offsetX / totalWidth;    //porcentaje en el que va la barra 
+        const newTime = percentage * currentplayed.duration;    //definimos la nueva duracion 
+        currentplayed.currentTime = newTime;  
+    }
+};
 
+// Manejar el clic en la barra de progreso para cambiar el tiempo del audio
+audioProgressContainer.addEventListener('click', setAudioTime);
 
-function playaudio() {    
-    let currentplayed;      //will save the audio that is playing at the moment, and we manipulate it later
-    
-    //we iterate all the HTMLElementObjects
-    audios.forEach(audio => {
-        document.addEventListener("keydown", (event) => {
-            //Verificate if the key we press match with the audios we have
-            if (event.key == audio.id) {
-                if (playing) {
-                    currentplayed.pause()
-                    currentplayed.currentTime = 0;
-                    audio.play();
-                    currentplayed = audio;
-                } else {    //It executes in case there's an audio playing at the moment
-                    playing = true; 
-                    currentplayed = audio;  
-                    audio.play();  
-                }
-            } else{
-                pauseAudio(audio, paused)
-            }
-        })        
-    })
-}
+// Manejar el arrastre de la barra de progreso
+audioProgressContainer.addEventListener('mousedown', (event) => {
+    desliza = true;
+    setAudioTime(event);
+});
+//Se activa cuando el usuario mueve el mouse
+document.addEventListener('mousemove', (event) => {
+    if (desliza) {
+        setAudioTime(event);
+    }
+});
+//Se activa cuando el usuario suelta el click
+document.addEventListener('mouseup', () => {
+    desliza = false;
+});
 
-playaudio()
-let playing = false;    //see if an audio is playing
-let paused = false;     //To verify if the audio is paused
+// Actualiza la barra de progreso cada 0.1 segundos para que se vea rapido la actualizacion de la barra
+setInterval(updateProgressBar, 100);
 
-const pauseAudio = (audio, paused) => {
-    if (paused) {
-        playing = true
-        paused = false;
-        audio.play();
-    }else {
-        playing = false
+//we get all the audio objects and we turn them from a node list into an array
+const audios = Array.from(document.querySelectorAll('.classAudio')); 
+let currentplayed = null;   //use to save the audio currently playing
+let playing = false;    //To identify if some audio is playing at the moment
+let paused = false; //To identify if the audio is paused
+
+//variables para el cambio de display entre no haber audio, y existir un audio en reproduccion
+const mensajeAudioInicio = document.getElementById('mensaje-audio-inicio');
+const container__elementosDeAudio = document.getElementById('container__elementosDeAudio');
+const audioProgressContainerBar = document.getElementById('audio-progress-container');   //Contenedor de la barra de progreso
+const imageDeAudio = document.getElementById('imagen-de-audio');    //imagen dinamica de los audios que se reproducen
+
+//variables para el cambio de display de las imagenes de los botones de pausa y resume
+const botonPausa = document.getElementById('botonPausa');
+const botonResume = document.getElementById('botonResume');
+
+//To active the play audio function only when we press a key
+document.addEventListener("keydown", (event) => {
+    playaudio(event.key);
+});
+
+//Use it to pause or resume the audio currently playing
+const pauseAudio = () => {
+    if (playing) {
+        botonPausa.style.display = 'none';
+        botonResume.style.display = 'flex';
+        
         paused = true;
-        audio.pause();
+        playing = false;
+        currentplayed.pause();
+    } else{
+        botonResume.style.display = 'none';
+        botonPausa.style.display = 'flex';
+
+        paused = false;
+        playing = true;
+        currentplayed.play();
     }
 }
 
+//Play the audio main function
+function playaudio(id) {
+    
+    //we find the audio case that matches with the parameter of the function
+    let audio = audios.find(a => a.id === id);  
+    
+    //In case it matches, it will reproduce the audio, otherwise it will pause or resume
+    if(audio){ 
+        //ponemos el display correcto cuando se reproduce y quitamos el mensaje 
+        mensajeAudioInicio.style.display = 'none';
+        container__elementosDeAudio.style.display = 'flex';
+        audioProgressContainerBar.style.display = 'flex';
+        imageDeAudio.style.display = 'flex';
+        imageDeAudio.src = `images/${audio.id}.png`;
 
+        //En caso de que se reproduzca el audio con el boton en pausa, este cambia el display al boton que le corresponde
+        if (paused) {
+            botonResume.style.display = 'none';
+            botonPausa.style.display = 'flex';
+        }
+        
+        //use it to identify if there's any audio playing, in that case, we stop it, set its time in 0, and play the new one
+        if (playing) {
+            currentplayed.pause();
+            currentplayed.currentTime = 0;
+        }
 
+        audio.play();
+        currentplayed = audio;
+        playing = true;
 
-//Obtener el elemento de audio
-// const dynamicVars = {
-//     "1": document.getElementById("1"),
-//     "2": document.getElementById("2"),
-//     "3": document.getElementById("3"),
-//     "4": document.getElementById("4"),
-//     "5": document.getElementById("5"),
-//     "6": document.getElementById("6"),
-//     "7": document.getElementById("7"),
-//     "8": document.getElementById("8"),
-//     "9": document.getElementById("9"),
-//     "d": document.getElementById("d"),
-//     "o": document.getElementById("o"),
-//     "z": document.getElementById("z")
-// };
-
-// const keys = Object.keys(dynamicVars);
-// console.log(keys);
-
-// document.addEventListener("keydown", function(event){
-//     playaudio(event.key)            
-// })
-
-// function playaudio(keypressed){
-//     if(keypressed != "p"){
-//         // console.log(Object.keys(dynamicVars).length);
-//         for(i = 0; i < Object.keys(dynamicVars).length; i++){
-//             if(keypressed != dynamicVars[keys[i]]){
-//                 //dynamicVars[keys[i]] son todas las teclas que hay
-//                 // console.log(dynamicVars[keys[i]]);
-//                 dynamicVars[keys[i]].pause();
-//             }
-//         }
-//         //si la tecla no es una de las de dynamic vars, sale undefined
-//         console.log(dynamicVars[keypressed]);
-//         try{
-//             dynamicVars[keypressed].play();
-//         }
-//         catch{}
-//     }else{
-//         console.log('here');
-//         for(i = 0; i < Object.keys(dynamicVars).length; i++){
-//             dynamicVars[keys[i]].play();
-//             // console.log(dynamicVars[keys[i]]);
-//         }
-//     }
-// }
+    } else {
+        pauseAudio();
+    }
+}
 
 //Imagenes que saltan en caso de apretar dichos botones
 const botonimagen = document.getElementById("botono");
@@ -123,6 +143,7 @@ botonimagen.addEventListener('click', function(){
 botonimagen2.addEventListener('click', function(){
     popup2.style.display = 'flex';
 });
+
 // Escuchar eventos de teclado en todo el documento
 setTimeout(function() {
     // Alert after 200 milliseconds
@@ -212,3 +233,11 @@ async function sendMessage() {
     scrollToBottom();
 
 }
+
+
+//consideraciones al cambiar de nombre a los audios, cambiar:
+// nombre del audio 
+// nombre de la imagen 
+// onclick de los botones 
+// id de la etiqueta audio 
+// source de la etiqueta audio
