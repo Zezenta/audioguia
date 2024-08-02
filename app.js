@@ -5,19 +5,21 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = 443;
 
 const API_KEY = process.env.OPENAI_API_KEY;
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'geoecuador.site')));
+//app.use(express.static(path.join(__dirname, 'public_html/geoecuador.site')));
 
 app.post('/api/chat', (req, res) => {
   const { question } = req.body;
+  console.log(req.body);
 
   const data = { //AQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODO
-    model: "gpt-4o-mini",  // Change to "gpt-4" if you have access
-    messages: [{role:"system", content: `Eres un experto en geología con una lista de formaciones geológicas del Ecuador, a cualquier pregunta que no tenga tanto que ver con geología, dile que no la puedes ayudar con eso, ya que tu área de expertís es geología. A las preguntas sobre las formaciones en Ecuador, respóndelas en una sola frase, y de manera breve. Si te preguntan sobre una formación cuyo nombre se repite 2 veces en 2 formaciones o más, proporciona información sobre ambas. Básate en la siguiente tabla CSV:
+    model: "gpt-4o",  // Change to "gpt-4" if you have access
+    messages: [{role:"system", content: `Tu nombre es GeoBot, eres un experto en geología con una lista de formaciones geológicas del Ecuador, a cualquier pregunta que no tenga tanto que ver con geología, dile que no la puedes ayudar con eso, ya que tu área de expertís es geología. A las preguntas sobre las formaciones en Ecuador, respóndelas en una sola frase, y de manera breve. No uses lenguaje MarkDown, solo lenguaje natural. Si te preguntan sobre una formación cuyo nombre se repite 2 veces en 2 formaciones o más, proporciona información sobre ambas. Si el usuario no te hace ninguna pregunta, dile que tu nombre es GeoBot y que lo puedes ayudar con preguntas como "Háblame sobre la formación Yunguilla". Básate en la siguiente tabla CSV:
 Era,Período/Época,Ubicación,Tipo,Nombre,Litología,Qué es / Cuál es
 Cenozoico,Cuaternario,Costa,Depósitos cuaternarios,Terrazas marinas costeras,Arcillas marinas de estuario,
 Cenozoico,Cuaternario,Costa,Depósitos cuaternarios,Llanuras aluviales,"Arcillas, limos y arenas",
@@ -193,7 +195,8 @@ Mesozoico,Cretácico,Cuenca Alamor Lancones,Unidad,Punta de Piedra,"Basaltos, to
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'test.html'));
+  res.sendFile(path.join(__dirname, 'geoecuador.site', 'index.html'));
+  //res.sendFile(path.join(__dirname, '../public_html/geoecuador.site', 'index.html')); SERVER
 });
 
 app.listen(port, () => {

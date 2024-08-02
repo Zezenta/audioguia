@@ -152,3 +152,63 @@ window.onclick = function(event) {
         popup2.style.display = 'none';
     }
 }
+
+//CHAT
+async function askIA(pregunta) {
+    const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: pregunta }),
+    });
+    const data = await response.json();
+    return data.choices[0].message.content;
+}
+var shown = false;
+function toggleChat() {
+    console.log("togglecaht");
+    const chatWindow = document.getElementById('chat-window');
+    if(!shown){ //si está oculto, muéstrelo
+        chatWindow.style.display = "flex";
+        shown = true;
+    }else{
+        chatWindow.style.display = "none";
+        shown = false;
+    }
+
+}
+document.addEventListener('keyup', (event) => {
+    if (event.key == 'Enter') {
+        sendMessage()
+    }
+});
+function scrollToBottom() {
+    const chatMessages = document.getElementById('chat-messages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function sendMessage() {
+    const chatMessages = document.getElementById('chat-messages');
+    const chatText = document.getElementById('chat-text');
+
+    if (chatText.value.trim() === '') return;
+
+    // User message
+    const userMessage = document.createElement('div');
+    userMessage.textContent = chatText.value;
+    userMessage.classList.add('user-message');
+    chatMessages.appendChild(userMessage);
+    chatText.value = '';
+    scrollToBottom();
+
+    // Response message
+    const botMessage = document.createElement('div');
+    botMessage.textContent = await askIA(userMessage.textContent);
+    botMessage.classList.add('bot-message');
+    chatMessages.appendChild(botMessage);
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    scrollToBottom();
+
+}
