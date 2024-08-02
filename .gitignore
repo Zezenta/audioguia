@@ -1,4 +1,4 @@
 *.rar
-node_modules
 .env
+node_modules
 test1.html
