@@ -61,21 +61,22 @@ setInterval(updateProgressBar, 100);
 const audios = Array.from(document.querySelectorAll('.classAudio')); 
 let currentplayed = null;   //use to save the audio currently playing
 let playing = false;    //To identify if some audio is playing at the moment
-let paused = false;
+let paused = false; //To identify if the audio is paused
 
 //variables para el cambio de display entre no haber audio, y existir un audio en reproduccion
 const mensajeAudioInicio = document.getElementById('mensaje-audio-inicio');
-const elementosDeAudio = document.getElementById('elementos-de-audio');
+const container__elementosDeAudio = document.getElementById('container__elementosDeAudio');
+const audioProgressContainerBar = document.getElementById('audio-progress-container');   //Contenedor de la barra de progreso
+const imageDeAudio = document.getElementById('imagen-de-audio');    //imagen dinamica de los audios que se reproducen
+
 //variables para el cambio de display de las imagenes de los botones de pausa y resume
 const botonPausa = document.getElementById('botonPausa');
 const botonResume = document.getElementById('botonResume');
-
 
 //To active the play audio function only when we press a key
 document.addEventListener("keydown", (event) => {
     playaudio(event.key);
 });
-
 
 //Use it to pause or resume the audio currently playing
 const pauseAudio = () => {
@@ -83,7 +84,6 @@ const pauseAudio = () => {
         botonPausa.style.display = 'none';
         botonResume.style.display = 'flex';
         
-        mensajeAudioInicio.style.display = 'none';
         paused = true;
         playing = false;
         currentplayed.pause();
@@ -99,22 +99,31 @@ const pauseAudio = () => {
 
 //Play the audio main function
 function playaudio(id) {
-    //ponemos el display correcto cuando se reproduce y quitamos el mensaje
-    mensajeAudioInicio.style.display = 'none';
-    elementosDeAudio.style.display = 'flex';
-
+    
     //we find the audio case that matches with the parameter of the function
     let audio = audios.find(a => a.id === id);  
-
+    
     //In case it matches, it will reproduce the audio, otherwise it will pause or resume
     if(audio){ 
+        //ponemos el display correcto cuando se reproduce y quitamos el mensaje 
+        mensajeAudioInicio.style.display = 'none';
+        container__elementosDeAudio.style.display = 'flex';
+        audioProgressContainerBar.style.display = 'flex';
+        imageDeAudio.style.display = 'flex';
+        imageDeAudio.src = `images/${audio.id}.png`;
+
+        //En caso de que se reproduzca el audio con el boton en pausa, este cambia el display al boton que le corresponde
+        if (paused) {
+            botonResume.style.display = 'none';
+            botonPausa.style.display = 'flex';
+        }
+        
         //use it to identify if there's any audio playing, in that case, we stop it, set its time in 0, and play the new one
         if (playing) {
             currentplayed.pause();
             currentplayed.currentTime = 0;
         }
 
-        console.log('playing');
         audio.play();
         currentplayed = audio;
         playing = true;
@@ -134,12 +143,12 @@ botonimagen.addEventListener('click', function(){
 botonimagen2.addEventListener('click', function(){
     popup2.style.display = 'flex';
 });
+
 // Escuchar eventos de teclado en todo el documento
 setTimeout(function() {
     // Alert after 200 milliseconds
     alert("Para reproducir cada audio cliquee sobre el tema en el Menú de Índice")
 }, 200);
-// Get the modal
 
 // Get the button that opens the modal
 // Get the <span> element that closes the modal
@@ -147,7 +156,6 @@ const span = document.getElementById('closePopup');
 const span2 = document.getElementById('closePopup2');
 
 // When the user clicks the button, open the modal 
-
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     popup.style.display = 'none';
@@ -163,3 +171,12 @@ window.onclick = function(event) {
         popup2.style.display = 'none';
     }
 }
+
+
+
+//consideraciones al cambiar de nombre a los audios, cambiar:
+// nombre del audio 
+// nombre de la imagen 
+// onclick de los botones 
+// id de la etiqueta audio 
+// source de la etiqueta audio

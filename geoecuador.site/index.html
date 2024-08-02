@@ -10,6 +10,7 @@
     <header id="main-header" class="main-header">
         <img src="images/header.png" alt="header" class="logo" id="logo"></img>
     </header>
+
     <div class="map-container">
         <img src="images/contenido2.png" alt="Geología del Ecuador" class="contenido">
         <!-- Example buttons positioned inside the rectangle to the right -->
@@ -24,7 +25,7 @@
             <button class="map-button boton7" style="background-color: #c1ff72;" onclick="playaudio('7')">7. Cordillera Occidental</button>
             <button class="map-button boton8" style="background-color: #cb6ce6;" onclick="playaudio('8')">8. Cuencas de antearco</button>
             <button class="map-button boton9" style="background-color: #b87209;" onclick="playaudio('9')">9. Cuencas intramontanas</button>
-            <button class="map-button botond" style="background-color: #9ac0ed;" onclick="playaudio('d')">10. Callejon Interandino y<br>Arco Cuaternario</button>
+            <button class="map-button botond" style="background-color: #9ac0ed;" onclick="playaudio('0')">10. Callejon Interandino y<br>Arco Cuaternario</button>
             <button id="botono" class="map-button botono" style="background-color: #e43099;" onclick="playaudio('o')">11. Evolución Geológica<br>del Ecuador</button>
             <button id="botonz" class="map-button botonz" style="background-color: #0077ff;" onclick="playaudio('z')">12. Tectónica de los<br>Andes ecuatorianos</button>
         </div>
@@ -37,74 +38,84 @@
     <div id="manejo-audio">
         <!-- Aviso de reproducir un audio -->
         <span id="mensaje-audio-inicio">Reproduce un audio:</span>
-        <!-- Contenedor de los elementos que forman parte del audio -->
-        <div id="elementos-de-audio" style="display: none;">
-            <!-- Barra de progreso -->
-            <div id="audio-progress-container">
-                <div id="audio-progress-bar"></div>
-            </div>
-            <!-- boton de pausar y reanudar -->
-            <button onclick=playaudio() class="botonPausa" id="botonPausa">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-pause-filled" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="#c9de00" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M9 4h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2z" stroke-width="0" fill="currentColor" />
-                    <path d="M17 4h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2z" stroke-width="0" fill="currentColor" />
-                </svg>
-            </button>
-            <button onclick=playaudio() class="botonPausa" id="botonResume" style="display: none;">
-                <img src="images/playbutton_113628.svg" alt="boton_pause" id="imagen_reproducir">
-            </button>
+        <!-- Barra de progreso -->
+        <div id="audio-progress-container" style="display: none;">
+            <div id="audio-progress-bar"></div>
         </div>
-        <!-- Audios -->
-        <audio id="1" class="classAudio">
-            <source src="audios/1.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="2" class="classAudio">
-            <source src="audios/2.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="3" class="classAudio">
-            <source src="audios/3.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="4" class="classAudio">
-            <source src="audios/4.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="5" class="classAudio">
-            <source src="audios/5.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="6" class="classAudio">
-            <source src="audios/6.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="7" class="classAudio">
-            <source src="audios/7.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="8" class="classAudio">
-            <source src="audios/8.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="9" class="classAudio">
-            <source src="audios/9.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="d" class="classAudio">
-            <source src="audios/d.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="o" class="classAudio">
-            <source src="audios/o.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        <audio id="z" class="classAudio">
-            <source src="audios/z.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
+
+        <!-- Contenedor de los elementos que forman parte del audio -->
+        <div id="container__elementosDeAudio" style="display: none;">
+            <!-- Imagen de los botones-->
+            <div id="img__boton" >
+                <img src="images/1.png" id="imagen-de-audio" style="display: none;">
+            </div>
+
+            <!-- botones de pausar y reanudar -->
+            <div id="elementos-de-audio">
+                <button onclick=playaudio() class="botonPausa" id="botonPausa">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-pause-filled" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="#c9de00" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M9 4h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2z" stroke-width="0" fill="currentColor" />
+                        <path d="M17 4h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2z" stroke-width="0" fill="currentColor" />
+                    </svg>
+                </button>
+                <button onclick=playaudio() class="botonPausa" id="botonResume" style="display: none;">
+                    <img src="images/playbutton_113628.svg" alt="boton_pause" id="imagen_reproducir">
+                </button>
+            </div>
+        </div>
     </div>
+
+    <!-- Audios -->
+    <audio id="1" class="classAudio">
+        <source src="audios/1.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="2" class="classAudio">
+        <source src="audios/2.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="3" class="classAudio">
+        <source src="audios/3.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="4" class="classAudio">
+        <source src="audios/4.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="5" class="classAudio">
+        <source src="audios/5.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="6" class="classAudio">
+        <source src="audios/6.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="7" class="classAudio">
+        <source src="audios/7.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="8" class="classAudio">
+        <source src="audios/8.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="9" class="classAudio">
+        <source src="audios/9.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="0" class="classAudio">
+        <source src="audios/0.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="o" class="classAudio">
+        <source src="audios/o.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="z" class="classAudio">
+        <source src="audios/z.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    
     <!-- Contendores de imagenes que saltan -->
     <div id="pops_container">
         <div id="popup" class="popup">
