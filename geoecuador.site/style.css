@@ -115,6 +115,7 @@ body {
     width: 100%;
     height: 100%;
     align-items: center;
+    position: relative;
 }
 
 #img__boton {
@@ -122,15 +123,18 @@ body {
     height: 50px;
     margin-left: 30px;
     /* border-radius: 10px; */
+    z-index: 1;
+    position: relative;
 }
 #img__boton img {
-    width: 100%;
-    height: 100%;
+    max-height: 50px;
     border-radius: 8px;
     /* border: 10px; */
 }
 
 #elementos-de-audio {
+    position: absolute;
+    width: 100%;
     height: 100%;
     display: flex;
     /* flex-direction: column; */
@@ -138,7 +142,10 @@ body {
     padding: 0;
     margin: 0;
     margin-left: auto;
-    margin-right: auto  ;
+    margin-right: auto;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
 }
 
 #audio-progress-container {
@@ -167,17 +174,39 @@ body {
     border-radius: 100%;
     box-sizing: border-box;
     margin-top: 5px;
-    margin-right: 350px;
+    left: 500px;
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 6vh;
-    height: 6vh;
+    width: 50px;
+    height: 50px;
 }
+
 .botonPausa:hover {
     background-color: rgba(225, 225, 225, 0.967);
+}
+
+.botonSec {
+    border-radius: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+    left: 500px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.imagen-control {
+    width: 20px;
+    height: 20px;
 }
 
 .icon-tabler-player-pause-filled {
@@ -186,8 +215,10 @@ body {
 }
 
 #imagen_reproducir {
-    width: 3vh;
-    height: 3vh;
+    width: 25px;
+    height: 25px;
+    padding-left: 3px;
+
 }
 
 .popup {

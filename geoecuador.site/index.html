@@ -24,9 +24,9 @@
             <button class="map-button boton7" style="background-color: #c1ff72;" onclick="playaudio('7')">7. Cordillera Occidental</button>
             <button class="map-button boton8" style="background-color: #cb6ce6;" onclick="playaudio('8')">8. Cuencas de antearco</button>
             <button class="map-button boton9" style="background-color: #b87209;" onclick="playaudio('9')">9. Cuencas intramontanas</button>
-            <button class="map-button botond" style="background-color: #9ac0ed;" onclick="playaudio('0')">10. Callejon Interandino y<br>Arco Cuaternario</button>
-            <button id="botono" class="map-button botono" style="background-color: #e43099;" onclick="playaudio('o')">11. Evolución Geológica<br>del Ecuador</button>
-            <button id="botonz" class="map-button botonz" style="background-color: #0077ff;" onclick="playaudio('z')">12. Tectónica de los<br>Andes ecuatorianos</button>
+            <button class="map-button botond" style="background-color: #9ac0ed;" onclick="playaudio('10')">10. Callejon Interandino y<br>Arco Cuaternario</button>
+            <button id="botono" class="map-button botono" style="background-color: #e43099;" onclick="playaudio('11')">11. Evolución Geológica<br>del Ecuador</button>
+            <button id="botonz" class="map-button botonz" style="background-color: #0077ff;" onclick="playaudio('12')">12. Tectónica de los<br>Andes ecuatorianos</button>
         </div>
         <!-- Add more buttons as needed with appropriate positioning -->
     </div>
@@ -57,6 +57,10 @@
 
             <!-- botones de pausar y reanudar -->
             <div id="elementos-de-audio">
+                <button onclick=previous() class="botonSec">
+                    <img src="images/previous.png" class="imagen-control">
+                    <!--ICONO BOTON ANTERIOR-->
+                </button>
                 <button onclick=playaudio() class="botonPausa" id="botonPausa">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-pause-filled" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="#c9de00" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -66,6 +70,9 @@
                 </button>
                 <button onclick=playaudio() class="botonPausa" id="botonResume" style="display: none;">
                     <img src="images/playbutton_113628.svg" alt="boton_pause" id="imagen_reproducir">
+                </button>
+                <button onclick=next() class="botonSec">
+                    <img src="images/next.png" class="imagen-control">
                 </button>
             </div>
         </div>
@@ -157,15 +164,15 @@
         <source src="audios/9.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
-    <audio id="0" class="classAudio">
+    <audio id="10" class="classAudio">
         <source src="audios/0.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
-    <audio id="o" class="classAudio">
+    <audio id="11" class="classAudio">
         <source src="audios/o.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
-    <audio id="z" class="classAudio">
+    <audio id="12" class="classAudio">
         <source src="audios/z.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>

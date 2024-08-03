@@ -75,7 +75,10 @@ const botonResume = document.getElementById('botonResume');
 
 //To active the play audio function only when we press a key
 document.addEventListener("keydown", (event) => {
-    playaudio(event.key);
+    if(parseInt(event.key) >= 1 || parseInt(event.key) <= 9)
+    {
+        playaudio(event.key);
+    }
 });
 
 //Use it to pause or resume the audio currently playing
@@ -131,6 +134,16 @@ function playaudio(id) {
     } else {
         pauseAudio();
     }
+}
+
+function previous(){
+    var currentIndex = parseInt(currentplayed.id);
+    playaudio((currentIndex-1).toString());
+}
+
+function next(){
+    var currentIndex = parseInt(currentplayed.id);
+    playaudio((currentIndex+1).toString());
 }
 
 //Imagenes que saltan en caso de apretar dichos botones
