@@ -18,7 +18,7 @@ app.post('/api/chat', (req, res) => {
   console.log(req.body);
 
   const data = { //AQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODOAQUI ESTA TODO
-    model: "gpt-4o",  // Change to "gpt-4" if you have access
+    model: "gpt-4o-mini",  // Change to "gpt-4" if you have access
     messages: [{role:"system", content: `Tu nombre es GeoBot, eres un experto en geología con una lista de formaciones geológicas del Ecuador, a cualquier pregunta que no tenga tanto que ver con geología, dile que no la puedes ayudar con eso, ya que tu área de expertís es geología. A las preguntas sobre las formaciones en Ecuador, respóndelas en una sola frase, y de manera breve. No uses lenguaje MarkDown, solo lenguaje natural. Si te preguntan sobre una formación cuyo nombre se repite 2 veces en 2 formaciones o más, proporciona información sobre ambas. Si el usuario no te hace ninguna pregunta, dile que tu nombre es GeoBot y que lo puedes ayudar con preguntas como "Háblame sobre la formación Yunguilla". Básate en la siguiente tabla CSV:
 Era,Período/Época,Ubicación,Tipo,Nombre,Litología,Qué es / Cuál es
 Cenozoico,Cuaternario,Costa,Depósitos cuaternarios,Terrazas marinas costeras,Arcillas marinas de estuario,
@@ -151,29 +151,7 @@ Mesozoico,Cretácico,Cuenca Alamor Lancones,Unidad,Chaguarpamba,Sedimentos volc�
 Mesozoico,Cretácico,Cuenca Alamor Lancones,Volcánicos,Bramaderos,"Aglomerados, tobas, grauvacas",
 Mesozoico,Cretácico,Cuenca Alamor Lancones,Formación,Celica,Lavas andesíticas-basálticas y piroclásticas.,
 Mesozoico,Cretácico,Cuenca Alamor Lancones,Unidad,Punta de Piedra,"Basaltos, tobas y brechas volcánicas.",
--,-,-,Intrusivo,Catamayo,Granito,
--,-,-,Intrusivo,Condué,Granito,
--,-,-,Intrusivo,Abitagua,Granito,
--,-,-,Intrusivo,Baeza,Granodiorita,
--,-,-,Intrusivo,Chaucha,Granodiorita,
--,-,-,Intrusivo,Rumiyacu,Granodiorita,
--,-,-,Intrusivo,Apagua,Granodiorita,
--,-,-,Intrusivo,Industria,Granodiorita,
--,-,-,Intrusivo,Amaluza,Granodiorita,
--,-,-,Intrusivo,Pungalá,Granodiorita,
--,-,-,Intrusivo,El Tingo,Granodiorita,
--,-,-,Intrusivo,Río Pichinal,Granodiorita,
--,-,-,Intrusivo,San Lucas,Granodiorita,
--,-,-,Intrusivo,Magtayán,Granodiorita,
--,-,-,Intrusivo,Pimampiro,Granodiorita,
--,-,-,Intrusivo,Chaupicruz,Tonalita,
--,-,-,Intrusivo,Balsapamba,Tonalita,
--,-,-,Intrusivo,Río Baboso,Tonalita,
--,-,-,Intrusivo,Rosa Florida,Sienita,
--,-,-,Intrusivo,Maldonado,Monzonita,
--,-,-,Intrusivo,La Esperie,Diorita,
--,-,-,Intrusivo,Apuela,Cuarzodiorita,
--,-,-,Intrusivo,Tampanchi,Gabro,`}, { role: "user", content: question }],
+`}, { role: "user", content: question }],
     temperature: 0.7
   };
 

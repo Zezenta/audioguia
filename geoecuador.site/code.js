@@ -246,11 +246,3 @@ async function sendMessage() {
     scrollToBottom();
 
 }
-
-
-//consideraciones al cambiar de nombre a los audios, cambiar:
-// nombre del audio 
-// nombre de la imagen 
-// onclick de los botones 
-// id de la etiqueta audio 
-// source de la etiqueta audio
