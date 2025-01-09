@@ -5,7 +5,7 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const port = 443;
+const port = 5000;
 
 const API_KEY = process.env.OPENAI_API_KEY;
 
