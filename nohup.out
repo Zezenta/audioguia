@@ -64,3 +64,8 @@ Hola, soy GeoBot y puedo ayudarte con preguntas como "Háblame sobre la formaci�
 { question: 'Sí' }
 Hola, soy GeoBot y puedo ayudarte con preguntas como "Háblame sobre la formación Yunguilla".
 4755
+/var/www/geoecuador.site
+Server is running on http://localhost:5000
+{ question: 'Hola qué tal' }
+Hola, soy GeoBot y puedo ayudarte con preguntas como "Háblame sobre la formación Yunguilla".
+4756
