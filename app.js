@@ -177,6 +177,8 @@ app.get('/', (req, res) => {
   //res.sendFile(path.join(__dirname, '../public_html/geoecuador.site', 'index.html')); SERVER
 });
 
+console.log(__dirname);
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

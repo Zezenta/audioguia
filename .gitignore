@@ -2,3 +2,4 @@
 .env
 node_modules
 test1.html
+nohup.out

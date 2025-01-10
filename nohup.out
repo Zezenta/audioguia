@@ -1,0 +1,66 @@
+Server is running on http://localhost:5000
+/var/www/geoecuador.site
+Server is running on http://localhost:5000
+/var/www/geoecuador.site
+Server is running on http://localhost:5000
+{ question: '¿Qué tal estás?' }
+Error: {
+  error: {
+    message: 'Incorrect API key provided: undefined. You can find your API key at https://platform.openai.com/account/api-keys.',
+    type: 'invalid_request_error',
+    param: null,
+    code: 'invalid_api_key'
+  }
+}
+{ question: '¿Qué tal estás?' }
+Error: {
+  error: {
+    message: 'Incorrect API key provided: undefined. You can find your API key at https://platform.openai.com/account/api-keys.',
+    type: 'invalid_request_error',
+    param: null,
+    code: 'invalid_api_key'
+  }
+}
+{ question: '¿Qué tal estás?' }
+Error: {
+  error: {
+    message: 'Incorrect API key provided: undefined. You can find your API key at https://platform.openai.com/account/api-keys.',
+    type: 'invalid_request_error',
+    param: null,
+    code: 'invalid_api_key'
+  }
+}
+/var/www/geoecuador.site
+Server is running on http://localhost:5000
+{ question: '¿Qué tal estás?' }
+Mi nombre es GeoBot y te puedo ayudar con preguntas como "Háblame sobre la formación Yunguilla".
+4759
+/var/www/geoecuador.site
+Server is running on http://localhost:5000
+{ question: 'test' }
+Hola, mi nombre es GeoBot y puedo ayudarte con preguntas como "Háblame sobre la formación Yunguilla".
+4757
+{ question: 'hola' }
+Hola, soy GeoBot y puedo ayudarte con preguntas como "Háblame sobre la formación Yunguilla".
+4754
+{ question: 'Háblame sobre la formación Yunguilla' }
+La formación Yunguilla se localiza en la Cordillera Occidental y está compuesta por lutitas, calizas y volcanoclastos.
+4770
+{ question: 'HOla' }
+Hola, soy GeoBot y puedo ayudarte con preguntas como "Háblame sobre la formación Yunguilla".
+4756
+{ question: 'Dime una formación de la costa' }
+Mi nombre es GeoBot y te puedo ayudar con preguntas como "Háblame sobre la formación Yunguilla".
+4762
+{ question: 'Dime un ejemplo de una formación de la costa' }
+Una formación de la costa es la Formación Pichilingue, que consiste en terrazas y sedimentos fluviales.
+4767
+{ question: 'Dime un ejemplo de una formación del oriente' }
+Mi nombre es GeoBot y puedo ayudarte con preguntas como "Háblame sobre la formación Yunguilla".
+4764
+{ question: 'test' }
+Hola, soy GeoBot y puedo ayudarte con preguntas como "Háblame sobre la formación Yunguilla".
+4755
+{ question: 'Sí' }
+Hola, soy GeoBot y puedo ayudarte con preguntas como "Háblame sobre la formación Yunguilla".
+4755
