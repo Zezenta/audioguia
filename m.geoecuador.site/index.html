@@ -1,19 +1,203 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Mobile test</title>
-	</head>
-	<body>
-		<p>This should only show on mobile</p>
-	<style type="text/css">
-		* {
-			background: black;
-			color: white;
-			font-family: Consolas;
-			font-size: 60px;
-		}
-	</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Audioguía Geológica">
+    <meta property="og:description" content="Una audioguía sobre las formaciones geológicas del ecuador">
+    <meta property="og:image" content="images/preview.png">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="600">
+    <title>Audioguía</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="src/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="src/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="src/favicon-16x16.png">
+    <link rel="manifest" href="src/site.webmanifest">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="main-header" class="main-header">
+        <img src="../images/header.png" alt="header" class="logo" id="logo"></img>
+    </header>
+    <div class="map-container">
+        <img src="../geoecuador.site/images/contenido2.png" alt="Geología del Ecuador" class="contenido">
+        <!-- Example buttons positioned inside the rectangle to the right -->
+        <div class="botones">
+            <h1 style="color: white; font-family: 'KG Primary Penmanship'; text-align: center; font-size: 60px;">Menú</h1>
+            <button class="map-button boton1" style="background-color: #5271ff;" onclick="playaudio('1')">1. Introducción</button>
+            <button class="map-button boton2" style="background-color: #f16728;" onclick="playaudio('2')">2. Geodinámica</button>
+            <button class="map-button boton3" style="background-color: #058b06;" onclick="playaudio('3')">3. Cuenca Oriente</button>
+            <button class="map-button boton4" style="background-color: #ff3131;" onclick="playaudio('4')">4. Cordillera Real</button>
+            <button class="map-button boton5" style="background-color: #5ce1e6;" onclick="playaudio('5')">5. Bloque Amotape-Tahuín</button>
+            <button class="map-button boton6" style="background-color: #ffbd59;" onclick="playaudio('6')">6. Cuenca Lancones Alamar</button>
+            <button class="map-button boton7" style="background-color: #c1ff72;" onclick="playaudio('7')">7. Cordillera Occidental</button>
+            <button class="map-button boton8" style="background-color: #cb6ce6;" onclick="playaudio('8')">8. Cuencas de antearco</button>
+            <button class="map-button boton9" style="background-color: #b87209;" onclick="playaudio('9')">9. Cuencas intramontanas</button>
+            <button class="map-button botond" style="background-color: #9ac0ed;" onclick="playaudio('10')">10. Callejon Interandino y<br>Arco Cuaternario</button>
+            <button id="botono" class="map-button botono" style="background-color: #e43099;" onclick="playaudio('11')">11. Evolución Geológica<br>del Ecuador</button>
+            <button id="botonz" class="map-button botonz" style="background-color: #0077ff;" onclick="playaudio('12')">12. Tectónica de los<br>Andes ecuatorianos</button>
+        </div>
+        <!-- Add more buttons as needed with appropriate positioning -->
+    </div>
+    <div id="popup" class="popup">
+        <span id="closePopup" class="close">&times;</span>
+        <img src="images/dibujo.jpg" alt="Popup Image" class="popup-content">
+    </div>
+    <div id="popup2" class="popup">
+        <span id="closePopup2" class="close">&times;</span>
+        <img src="images/dibujo2.jpg" alt="Popup Image" class="popup-content">
+    </div>
+    <div id="relleno"></div>
+       <!-- Cotenedor static que administra todo el audio -->
+       <div id="manejo-audio">
+        <!-- Aviso de reproducir un audio -->
+        <span id="mensaje-audio-inicio">Reproduce un audio:</span>
+        <!-- Barra de progreso -->
+        <div id="audio-progress-container" style="display: none;">
+            <div id="audio-progress-bar"></div>
+        </div>
+
+        <!-- Contenedor de los elementos que forman parte del audio -->
+        <div id="container__elementosDeAudio" style="display: none;">
+            <!-- Imagen de los botones-->
+            <div id="img__boton" >
+                <img src="images/1.png" id="imagen-de-audio" style="display: none;">
+            </div>
+
+            <!-- botones de pausar y reanudar -->
+            <div id="elementos-de-audio">
+                <button onclick=previous() class="botonSec">
+                    <img src="images/previous.png" class="imagen-control">
+                    <!--ICONO BOTON ANTERIOR-->
+                </button>
+                <button onclick=playaudio() class="botonPausa" id="botonPausa">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-pause-filled" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="#c9de00" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M9 4h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2z" stroke-width="0" fill="currentColor" />
+                        <path d="M17 4h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2z" stroke-width="0" fill="currentColor" />
+                    </svg>
+                </button>
+                <button onclick=playaudio() class="botonPausa" id="botonResume" style="display: none;">
+                    <img src="images/playbutton_113628.svg" alt="boton_pause" id="imagen_reproducir">
+                </button>
+                <button onclick=next() class="botonSec">
+                    <img src="images/next.png" class="imagen-control">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHAT -->
+    <div id="chat-bubble" onclick="toggleChat()">
+        <!-- TODO ESTO ES EL ÍCONO DEL CHATBOT-->
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+        width="45" height="50" viewBox="0 0 227.000000 222.000000"
+        preserveAspectRatio="xMidYMid meet">
+       
+       <g transform="translate(0.000000,222.000000) scale(0.100000,-0.100000)"
+       fill="#000000" stroke="none">
+       <path d="M1045 2192 c-79 -38 -125 -112 -125 -202 0 -84 44 -160 113 -196 24
+       -13 27 -20 27 -69 l0 -55 -299 0 -299 0 -64 -33 c-89 -46 -135 -114 -150 -220
+       l-11 -77 -73 0 c-68 0 -76 -2 -109 -31 -51 -45 -57 -78 -53 -301 3 -180 5
+       -199 24 -224 40 -54 67 -67 142 -68 l70 -1 7 -55 c10 -82 41 -145 95 -193 45
+       -41 126 -77 171 -77 23 0 23 1 8 -200 -18 -242 -12 -242 280 10 l220 190 379
+       0 c431 0 448 2 527 72 56 49 92 120 101 198 l6 55 67 1 c83 1 124 22 151 79
+       18 37 20 62 20 233 0 213 -5 240 -59 285 -29 24 -41 27 -106 27 l-73 0 -7 62
+       c-13 110 -61 186 -146 233 l-54 30 -305 5 -305 5 -3 50 c-2 49 -1 50 42 77 25
+       14 57 46 73 69 25 37 28 52 28 119 0 67 -4 82 -28 118 -43 65 -97 96 -176 100
+       -49 2 -76 -2 -106 -16z m775 -634 c24 -13 58 -40 74 -61 l31 -39 3 -409 c2
+       -385 2 -412 -16 -453 -24 -53 -72 -91 -132 -105 -27 -6 -200 -11 -423 -11
+       l-379 0 -179 -156 c-99 -86 -182 -154 -184 -152 -2 2 1 65 7 141 12 158 9 167
+       -56 167 -94 0 -171 41 -206 110 -19 37 -20 60 -20 439 0 258 4 410 11 428 15
+       40 57 82 104 104 38 17 78 19 680 19 l641 0 44 -22z"/>
+       <path d="M687 1326 c-101 -37 -144 -143 -97 -235 51 -102 174 -127 260 -55 42
+       36 60 74 60 130 0 118 -114 200 -223 160z"/>
+       <path d="M1475 1329 c-67 -20 -115 -89 -115 -162 0 -183 246 -238 324 -73 41
+       88 4 184 -89 227 -44 20 -74 22 -120 8z"/>
+       <path d="M880 832 c-16 -5 -40 -31 -40 -44 0 -17 49 -53 120 -87 71 -34 80
+       -36 176 -36 101 0 103 0 190 45 94 48 116 69 98 97 -18 29 -49 33 -85 12 -93
+       -53 -117 -62 -175 -67 -83 -6 -120 2 -186 41 -66 41 -79 45 -98 39z"/>
+       </g>
+       </svg>
+       
+    </div>
+    <div id="chat-window">
+        <div id="chat-header">
+            GeoBot
+        </div>
+        <div id="chat-messages"></div>
+        <div id="chat-input">
+            <input type="text" id="chat-text" placeholder="'Háblame sobre la formación Tapala'">
+            <button onclick="sendMessage()"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 14l11 -11" />
+                <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+              </svg></button>
+        </div>
+    </div>
+
+     <!-- Audios -->
+     <audio id="1" class="classAudio">
+        <source src="audios/1.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="2" class="classAudio">
+        <source src="audios/2.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="3" class="classAudio">
+        <source src="audios/3.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="4" class="classAudio">
+        <source src="audios/4.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="5" class="classAudio">
+        <source src="audios/5.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="6" class="classAudio">
+        <source src="audios/6.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="7" class="classAudio">
+        <source src="audios/7.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="8" class="classAudio">
+        <source src="audios/8.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="9" class="classAudio">
+        <source src="audios/9.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="10" class="classAudio">
+        <source src="audios/0.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="11" class="classAudio">
+        <source src="audios/o.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="12" class="classAudio">
+        <source src="audios/z.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    
+    <!-- Contendores de imagenes que saltan -->
+    <div id="pops_container">
+        <div id="popup" class="popup">
+            <span id="closePopup" class="close">&times;</span>
+            <img src="images/dibujo.jpg" alt="Popup Image" class="popup-content">
+        </div>
+        <div id="popup2" class="popup">
+            <span id="closePopup2" class="close">&times;</span>
+            <img src="images/dibujo2.jpg" alt="Popup Image" class="popup-content">
+        </div>
+    </div>
+
+    <script src="code.js"></script>
 </body>
 </html>
