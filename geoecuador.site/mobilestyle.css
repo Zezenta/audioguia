@@ -51,6 +51,7 @@ body {
 .botones h1 {
     margin: 5px;
     margin-right: 300px;
+    margin-left: 20px;
 }
 
 .map-button {
